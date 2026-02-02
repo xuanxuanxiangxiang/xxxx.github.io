@@ -1,0 +1,361 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #faf8ef;
+  color: #776e65;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.password-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #faf8ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.password-overlay.hidden {
+  display: none;
+}
+
+.password-box {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 300px;
+}
+
+.password-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #776e65;
+  margin-bottom: 24px;
+}
+
+.password-input {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 18px;
+  border: 2px solid #bbada0;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.password-input:focus {
+  border-color: #8f7a66;
+}
+
+.password-error {
+  color: #f65e3b;
+  font-size: 14px;
+  margin-bottom: 12px;
+  min-height: 20px;
+}
+
+.password-btn {
+  background-color: #8f7a66;
+  color: #f9f6f2;
+  border: none;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s;
+}
+
+.password-btn:hover {
+  background-color: #9f8a76;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 72px;
+  font-weight: bold;
+  color: #776e65;
+  line-height: 1;
+}
+
+.scores {
+  display: flex;
+  gap: 10px;
+}
+
+.score-box {
+  background-color: #bbada0;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.score-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.score-value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.instructions {
+  font-size: 16px;
+  margin-bottom: 25px;
+  color: #776e65;
+}
+
+.instructions strong {
+  font-weight: bold;
+}
+
+.game-wrapper {
+  position: relative;
+  background-color: #bbada0;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  aspect-ratio: 1;
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+}
+
+.cell {
+  background-color: #cdc1b4;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  font-weight: bold;
+  min-height: 0;
+}
+
+.tile {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: transform 0.15s ease-in-out;
+  overflow: hidden;
+}
+
+.tile .tile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.tile .tile-number {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile.tile-no-image .tile-img {
+  display: none;
+}
+
+.tile.tile-no-image .tile-number {
+  display: flex;
+}
+
+/* Tile colors by value - matching the image */
+.tile-0 {
+  background-color: #cdc1b4;
+  color: transparent;
+  font-size: 0;
+}
+
+.tile-2 {
+  background-color: #eee4da;
+  color: #776e65;
+  font-size: 48px;
+}
+
+.tile-4 {
+  background-color: #ede0c8;
+  color: #776e65;
+  font-size: 48px;
+}
+
+.tile-8 {
+  background-color: #f2b179;
+  color: #f9f6f2;
+  font-size: 48px;
+}
+
+.tile-16 {
+  background-color: #f59563;
+  color: #f9f6f2;
+  font-size: 44px;
+}
+
+.tile-32 {
+  background-color: #f67c5f;
+  color: #f9f6f2;
+  font-size: 44px;
+}
+
+.tile-64 {
+  background-color: #f65e3b;
+  color: #f9f6f2;
+  font-size: 44px;
+}
+
+.tile-128 {
+  background-color: #edcf72;
+  color: #f9f6f2;
+  font-size: 36px;
+}
+
+.tile-256 {
+  background-color: #edcc61;
+  color: #f9f6f2;
+  font-size: 36px;
+}
+
+.tile-512 {
+  background-color: #edc850;
+  color: #f9f6f2;
+  font-size: 36px;
+}
+
+.tile-1024 {
+  background-color: #edc53f;
+  color: #f9f6f2;
+  font-size: 28px;
+}
+
+.tile-2048 {
+  background-color: #edc22e;
+  color: #f9f6f2;
+  font-size: 28px;
+}
+
+.tile-4096,
+.tile-8192 {
+  background-color: #3c3a32;
+  color: #f9f6f2;
+  font-size: 24px;
+}
+
+.game-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(238, 228, 218, 0.73);
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.game-overlay.visible {
+  display: flex;
+}
+
+.game-message {
+  font-size: 48px;
+  font-weight: bold;
+  color: #776e65;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.retry-btn {
+  background-color: #8f7a66;
+  color: #f9f6f2;
+  border: none;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.retry-btn:hover {
+  background-color: #9f8a76;
+}
+
+.overlay-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.continue-btn {
+  background-color: #8f7a66;
+  color: #f9f6f2;
+  border: none;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.continue-btn:hover {
+  background-color: #9f8a76;
+}
+
+@media (max-width: 520px) {
+  .title {
+    font-size: 52px;
+  }
+  .tile, .cell {
+    font-size: 32px;
+  }
+  .tile-2 { font-size: 36px; }
+  .tile-4 { font-size: 36px; }
+  .tile-8 { font-size: 36px; }
+  .tile-16, .tile-32, .tile-64 { font-size: 32px; }
+  .tile-128, .tile-256, .tile-512 { font-size: 28px; }
+  .tile-1024, .tile-2048 { font-size: 22px; }
+}
